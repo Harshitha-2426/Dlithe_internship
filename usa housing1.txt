@@ -1,0 +1,50 @@
+#importing pandas library to load the database
+import pandas as pd
+data=pd.read_csv('C:/Users/hp/Desktop/INTERNSHIP PROGRAMS/USA_Housing.csv')
+print(data)
+
+#in usa-housing dataset first five values are print
+data.head(5)
+
+#data description
+data.info()
+
+data.describe()
+
+#different coloums present in usa-housing dataset
+print(data.columns)
+
+#heatmap
+#heatmap is used to find the correlation between features and target
+import seaborn as sb
+sb.heatmap(data.corr(),annot=True)
+
+sb.pairplot(data)
+
+#distribution plot
+sb.distplot(data.Price)
+
+#creating arrays
+#x contains all the features/concepts
+#y contains the target value
+x=data.iloc[:,:-1].values
+y=data.iloc[:,-1].values
+
+#split the universal data
+#library:sklearn
+#module:mode_selection
+#class:train_test_split
+from sklearn.model_selection import train_test_split as tts
+x_train,x_test,y_train,y_test=tts(x,y)
+
+#algorithm selection
+#library:sklearn
+#class:linear regression
+from sklearn.linear_model import LinearRegression as linreg
+model_linreg=linreg()
+
+#train the model with training set of data
+#function:fit(arrays of x and y train)
+model_linreg.fit(x_train,y_train)
+
+
